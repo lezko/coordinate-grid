@@ -16,9 +16,15 @@ public class Screen {
     private final Graphics2D graphics;
 
     public Screen(Graphics2D graphics, int width, int height) {
+        this(graphics, width, height, 0, 0);
+    }
+
+    public Screen(Graphics2D graphics, int width, int height, double x, double y) {
         this.width = width;
         this.height = height;
         this.graphics = graphics;
+        this.x = x;
+        this.y = y;
     }
 
     public void update() {

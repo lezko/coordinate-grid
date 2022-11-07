@@ -29,6 +29,6 @@ public class Line implements Object {
     @Override
     public void render(Graphics2D graphics, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
         new BHLineDrawer(new GraphicsPixelDrawer(graphics))
-                .drawLine((int) ((point1.getX() + screenX) * scale), (int) ((point1.getY() + screenY) * scale), (int) ((point2.getX() + screenX) * scale), (int) ((point2.getY() + screenY) * scale));
+                .drawLine((int) ((point1.getX() - screenX) * scale), (int) ((point1.getY() - screenY) * scale), (int) ((point2.getX() - screenX) * scale), (int) ((point2.getY() - screenY) * scale));
     }
 }

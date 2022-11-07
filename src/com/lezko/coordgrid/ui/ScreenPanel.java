@@ -20,12 +20,16 @@ public class ScreenPanel extends JPanel {
     private final double MAX_SCALE = 2;
     private final int STEP_INTERVAL = 10;
 
+    private int width, height;
+
     private double currentScale = 1;
 
     public ScreenPanel(int width, int height) {
         setPreferredSize(new Dimension(width, height));
 
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        this.width = width;
+        this.height = height;
         imageGraphics = image.createGraphics();
 
         screen = new Screen(imageGraphics, width, height);
@@ -55,8 +59,8 @@ public class ScreenPanel extends JPanel {
         addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                screen.setX(screen.getX() + (e.getX() - holder.x) / currentScale);
-                screen.setY(screen.getY() + (e.getY() - holder.y) / currentScale);
+                screen.setX(screen.getX() - (e.getX() - holder.x) / currentScale);
+                screen.setY(screen.getY() - (e.getY() - holder.y) / currentScale);
                 repaint();
 
                 holder.x = e.getX();
@@ -75,10 +79,11 @@ public class ScreenPanel extends JPanel {
 
             x *= currentScale;
             y *= currentScale;
-
             screen.setScale(currentScale);
-            screen.setX(x - 40);
-            screen.setY(y - 40);
+            System.out.println(x);
+            System.out.println(y);
+            screen.setX(x - width / 2 * currentScale);
+            screen.setY(y - height / 2 * currentScale);
             screen.update();
             repaint();
         });

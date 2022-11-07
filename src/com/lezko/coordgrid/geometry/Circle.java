@@ -14,6 +14,6 @@ public class Circle implements Object {
 
     @Override
     public void render(Graphics2D graphics, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        graphics.drawOval((int) ((x + screenX) * scale), (int) ((y + screenY) * scale), (int) (r * 2 * scale), (int) (r * 2 * scale));
+        graphics.drawOval((int) ((x - screenX) * scale), (int) ((y - screenY) * scale), (int) (r * 2 * scale), (int) (r * 2 * scale));
     }
 }
