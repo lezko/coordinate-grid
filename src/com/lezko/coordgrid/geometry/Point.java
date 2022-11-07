@@ -23,6 +23,6 @@ public class Point implements Object {
 
     @Override
     public void render(Graphics2D graphics, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        new GraphicsPixelDrawer(graphics).drawPixel((int) (x - screenX), (int) (y - screenY), graphics.getColor());
+        new GraphicsPixelDrawer(graphics).drawPixel((int) ((x - screenX) * scale), (int) ((y - screenY) * scale), graphics.getColor());
     }
 }

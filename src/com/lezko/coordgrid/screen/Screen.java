@@ -9,7 +9,7 @@ import java.util.List;
 public class Screen {
 
     private double scale = 1;
-    private double x, y;
+    private double x, y, areaWidth, areaHeight;
     private int width, height;
 
     private final List<Object> objects = new ArrayList<>();
@@ -22,6 +22,8 @@ public class Screen {
     public Screen(Graphics2D graphics, int width, int height, double x, double y) {
         this.width = width;
         this.height = height;
+        this.areaWidth = width;
+        this.areaHeight = height;
         this.graphics = graphics;
         this.x = x;
         this.y = y;
@@ -60,5 +62,15 @@ public class Screen {
 
     public void setScale(double scale) {
         this.scale = scale;
+        areaWidth = width / scale;
+        areaHeight = height / scale;
+    }
+
+    public double getAreaWidth() {
+        return areaWidth;
+    }
+
+    public double getAreaHeight() {
+        return areaHeight;
     }
 }

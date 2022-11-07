@@ -16,6 +16,7 @@ public class ScreenPanel extends JPanel {
     private final BufferedImage image;
 
     private final double SCALE_RATE = 0.1;
+    private final double SCALE_STEP = 0.1;
     private final double MIN_SCALE = 0.3;
     private final double MAX_SCALE = 2;
     private final int STEP_INTERVAL = 10;
@@ -69,21 +70,25 @@ public class ScreenPanel extends JPanel {
         });
 
         addMouseWheelListener(e -> {
-            double x = screen.getX() + e.getX();
-            double y = screen.getY() + e.getY();
+            double dx = (double) e.getX() / width;
+            double dy = (double) e.getY() / height;
+            double x = e.getX() / currentScale;
+            double y = e.getY() / currentScale;
 
             currentScale -= e.getWheelRotation() * SCALE_RATE;
 
-            currentScale = Math.max(currentScale, MIN_SCALE);
-            currentScale = Math.min(currentScale, MAX_SCALE);
+            if (currentScale > MAX_SCALE) {
+                currentScale = MAX_SCALE;
+                return;
+            }
+            if (currentScale < MIN_SCALE) {
+                currentScale = MIN_SCALE;
+                return;
+            }
 
-            x *= currentScale;
-            y *= currentScale;
             screen.setScale(currentScale);
-            System.out.println(x);
-            System.out.println(y);
-            screen.setX(x - width / 2 * currentScale);
-            screen.setY(y - height / 2 * currentScale);
+            screen.setX(screen.getX() + x - screen.getAreaWidth() * dx);
+            screen.setY(screen.getY() + y - screen.getAreaHeight() * dy);
             screen.update();
             repaint();
         });
