@@ -1,16 +1,24 @@
 package com.lezko.coordgrid.geometry;
 
-import com.lezko.coordgrid.drawer.GraphicsPixelDrawer;
+import com.lezko.coordgrid.drawer.PixelDrawer;
 
 import java.awt.*;
 
 public class Point implements Object {
 
-    private final double x, y;
+    private static final Color DEFAULT_COLOR = Color.BLACK;
 
-    public Point(double x, double y) {
+    private final double x, y;
+    private Color color;
+
+    public Point(double x, double y, Color color) {
         this.x = x;
         this.y = y;
+        this.color = color;
+    }
+
+    public Point(double x, double y) {
+        this(x, y, DEFAULT_COLOR);
     }
 
     public double getX() {
@@ -21,8 +29,16 @@ public class Point implements Object {
         return y;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     @Override
-    public void render(Graphics2D graphics, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        new GraphicsPixelDrawer(graphics).drawPixel((int) ((x - screenX) * scale), (int) ((y - screenY) * scale), graphics.getColor());
+    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
+        pixelDrawer.drawPixel((int) ((x - screenX) * scale), (int) ((y - screenY) * scale), color);
     }
 }

@@ -1,7 +1,9 @@
 package com.lezko.coordgrid.geometry;
 
+import com.lezko.coordgrid.drawer.PixelDrawer;
+
 import java.awt.*;
 
 public interface Object {
-    public void render(Graphics2D graphics, double screenX, double screenY, int screenWidth, int screenHeight, double scale);
+    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale);
 }

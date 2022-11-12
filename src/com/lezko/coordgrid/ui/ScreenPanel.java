@@ -1,5 +1,6 @@
 package com.lezko.coordgrid.ui;
 
+import com.lezko.coordgrid.drawer.PixelDrawer;
 import com.lezko.coordgrid.geometry.*;
 import com.lezko.coordgrid.geometry.Point;
 import com.lezko.coordgrid.screen.Screen;
@@ -33,9 +34,10 @@ public class ScreenPanel extends JPanel {
         this.height = height;
         imageGraphics = image.createGraphics();
 
-        screen = new Screen(imageGraphics, width, height);
+        screen = new Screen((x, y, c) -> imageGraphics.fillRect(x, y, 1, 1), width, height);
 
         screen.addObject(new Circle(30, 30, 100));
+        screen.addObject(new Rect(20, 20, 300, 100));
         screen.addObject(new Line(60, 60, 160, 160));
         initKeyListeners();
         initMouseListeners();

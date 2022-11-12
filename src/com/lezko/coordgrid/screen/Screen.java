@@ -1,5 +1,6 @@
 package com.lezko.coordgrid.screen;
 
+import com.lezko.coordgrid.drawer.PixelDrawer;
 import com.lezko.coordgrid.geometry.Object;
 
 import java.awt.*;
@@ -13,25 +14,25 @@ public class Screen {
     private int width, height;
 
     private final List<Object> objects = new ArrayList<>();
-    private final Graphics2D graphics;
+    private final PixelDrawer pixelDrawer;
 
-    public Screen(Graphics2D graphics, int width, int height) {
-        this(graphics, width, height, 0, 0);
+    public Screen(PixelDrawer pixelDrawer, int width, int height) {
+        this(pixelDrawer, width, height, 0, 0);
     }
 
-    public Screen(Graphics2D graphics, int width, int height, double x, double y) {
+    public Screen(PixelDrawer pixelDrawer, int width, int height, double x, double y) {
         this.width = width;
         this.height = height;
         this.areaWidth = width;
         this.areaHeight = height;
-        this.graphics = graphics;
+        this.pixelDrawer = pixelDrawer;
         this.x = x;
         this.y = y;
     }
 
     public void update() {
         for (Object object : objects) {
-            object.render(graphics, x, y, width, height, scale);
+            object.render(pixelDrawer, x, y, width, height, scale);
         }
     }
 

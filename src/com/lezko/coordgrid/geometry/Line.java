@@ -1,9 +1,7 @@
 package com.lezko.coordgrid.geometry;
 
 import com.lezko.coordgrid.drawer.BHLineDrawer;
-import com.lezko.coordgrid.drawer.GraphicsPixelDrawer;
-
-import java.awt.*;
+import com.lezko.coordgrid.drawer.PixelDrawer;
 
 public class Line implements Object {
 
@@ -27,8 +25,8 @@ public class Line implements Object {
     }
 
     @Override
-    public void render(Graphics2D graphics, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        new BHLineDrawer(new GraphicsPixelDrawer(graphics))
+    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
+        new BHLineDrawer(pixelDrawer)
                 .drawLine((int) ((point1.getX() - screenX) * scale), (int) ((point1.getY() - screenY) * scale), (int) ((point2.getX() - screenX) * scale), (int) ((point2.getY() - screenY) * scale));
     }
 }
