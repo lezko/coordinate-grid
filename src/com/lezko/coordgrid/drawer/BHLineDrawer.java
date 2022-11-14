@@ -13,7 +13,7 @@ public class BHLineDrawer implements LineDrawer {
         return Integer.compare(x, 0);
     }
 
-    public void drawLine(int x1, int y1, int x2, int y2) {
+    public void drawLine(int x1, int y1, int x2, int y2, Color color) {
         int pdx, pdy, xORyWay1, xORyWay2, a;
 
         int dx = x2 - x1;
@@ -32,7 +32,7 @@ public class BHLineDrawer implements LineDrawer {
         }
 
         a = xORyWay2 / 2;
-        pd.drawPixel(x1, y1, Color.BLACK);
+        pd.drawPixel(x1, y1, color);
 
 
         for (int t = 0; t < xORyWay2; t++)
@@ -47,7 +47,7 @@ public class BHLineDrawer implements LineDrawer {
                 y1 += pdy;
             }
 
-            pd.drawPixel(x1, y1, Color.BLACK);
+            pd.drawPixel(x1, y1, color);
         }
     }
 }

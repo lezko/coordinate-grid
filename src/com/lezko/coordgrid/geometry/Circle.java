@@ -23,9 +23,18 @@ public class Circle implements Object {
     }
 
     @Override
-    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        double targetX = (x - screenX) * scale;
-        double targetY = (y - screenY) * scale;
+    public void render(
+        PixelDrawer pixelDrawer,
+        double screenX,
+        double screenY,
+        int screenWidth,
+        int screenHeight,
+        double scale,
+        boolean xInverted,
+        boolean yInverted
+    ) {
+        double targetX = (x * (xInverted ? -1 : 1) - screenX) * scale;
+        double targetY = (y * (yInverted ? -1 : 1) - screenY) * scale;
         double targetR = r * scale;
 
         double a = targetX + targetR;
@@ -33,8 +42,16 @@ public class Circle implements Object {
 
         for (double i = targetX; i < targetX + 2 * targetR; i += STEP) {
             double sqrtExpr = Math.sqrt(Math.pow(targetR, 2) - Math.pow(i - a, 2));
-            pixelDrawer.drawPixel((int) i, (int) (b + sqrtExpr), color);
-            pixelDrawer.drawPixel((int) i, (int) (b - sqrtExpr), color);
+            pixelDrawer.drawPixel(
+                (int) i,
+                (int) (b + sqrtExpr),
+                color
+            );
+            pixelDrawer.drawPixel(
+                (int) i,
+                (int) (b - sqrtExpr),
+                color
+            );
         }
     }
 }
