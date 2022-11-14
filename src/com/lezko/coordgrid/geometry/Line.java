@@ -40,6 +40,7 @@ public class Line implements Object {
         boolean xInverted,
         boolean yInverted
     ) {
+
         new BHLineDrawer(pixelDrawer).drawLine(
             (int) ((point1.getX() * (xInverted ? -1 : 1) - screenX) * scale),
             (int) ((point1.getY() * (yInverted ? -1 : 1) - screenY) * scale),

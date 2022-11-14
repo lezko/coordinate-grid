@@ -13,7 +13,7 @@ public class Screen {
     private int width, height;
 
     private boolean xInverted = false;
-    private boolean yInverted = true;
+    private boolean yInverted = false;
 
     private final List<Object> objects = new ArrayList<>();
     private final PixelDrawer pixelDrawer;

@@ -53,7 +53,7 @@ public class ScreenPanel extends JPanel {
                 imageGraphics.drawString(text, x, y);
             }
         });
-        grid.setBeforeRender(() -> imageGraphics.setColor(new Color(222, 222, 222)));
+        grid.setBeforeRender(() -> imageGraphics.setColor(new Color(179, 179, 179)));
         grid.setAfterRender(() -> imageGraphics.setColor(Color.GRAY));
         screen.addObject(grid);
 
@@ -67,12 +67,12 @@ public class ScreenPanel extends JPanel {
         initKeyListeners();
         initMouseListeners();
 
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                animateReset();
-            }
-        }, 3000);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                animateReset();
+//            }
+//        }, 3000);
     }
 
     private void initMouseListeners() {
@@ -164,6 +164,10 @@ public class ScreenPanel extends JPanel {
         });
     }
 
+    public Screen getScreen() {
+        return screen;
+    }
+
     public void setWidth(int width) {
         this.width = width;
         setPreferredSize(new Dimension(this.width, this.height));
@@ -190,7 +194,7 @@ public class ScreenPanel extends JPanel {
         screen.update(newX, newY, scale);
     }
 
-    private void animateReset() {
+    public void animateReset() {
         double dx = (-width / 2.0 / currentScale - screen.getX()) / ANIMATION_FRAMES_COUNT;
         double dy = (-height / 2.0 / currentScale - screen.getY()) / ANIMATION_FRAMES_COUNT;
         double dScale = (1 - screen.getScale()) / ANIMATION_FRAMES_COUNT;
