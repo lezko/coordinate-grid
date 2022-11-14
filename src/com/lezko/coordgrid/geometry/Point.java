@@ -38,7 +38,20 @@ public class Point implements Object {
     }
 
     @Override
-    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        pixelDrawer.drawPixel((int) ((x - screenX) * scale), (int) ((y - screenY) * scale), color);
+    public void render(
+        PixelDrawer pixelDrawer,
+        double screenX,
+        double screenY,
+        int screenWidth,
+        int screenHeight,
+        double scale,
+        boolean xInverted,
+        boolean yInverted
+    ) {
+        pixelDrawer.drawPixel(
+            (int) ((x * (xInverted ? -1 : 1) - screenX) * scale),
+            (int) ((y * (yInverted ? -1 : 1) - screenY) * scale),
+            color
+        );
     }
 }

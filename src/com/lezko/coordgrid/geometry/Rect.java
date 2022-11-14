@@ -7,28 +7,37 @@ import java.util.List;
 
 public class Rect implements Object {
 
-    private double x, y, width, height;
+    private double x1, y1, x2, y2;
     private final Line top, bottom, left, right;
     private final List<Line> lines;
 
-    public Rect(double x, double y, double width, double height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public Rect(double x1, double y1, double x2, double y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
 
-        top = new Line(x, y, x + width, y);
-        bottom = new Line(x, y + height, x + width, y + height);
-        left = new Line(x, y, x, y + height);
-        right = new Line(x + width, y, x + width, y + height);
+        top = new Line(x1, y1, x2, y1);
+        bottom = new Line(x1, y2, x2, y2);
+        left = new Line(x1, y1, x1, y2);
+        right = new Line(x2, y1, x2, y2);
 
         lines = Arrays.asList(top, bottom, left, right);
     }
 
     @Override
-    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
+    public void render(
+        PixelDrawer pixelDrawer,
+        double screenX,
+        double screenY,
+        int screenWidth,
+        int screenHeight,
+        double scale,
+        boolean xInverted,
+        boolean yInverted
+    ) {
         for (Line line : lines) {
-            line.render(pixelDrawer, screenX, screenY, screenWidth, screenHeight, scale);
+            line.render(pixelDrawer, screenX, screenY, screenWidth, screenHeight, scale, xInverted, yInverted);
         }
     }
 }

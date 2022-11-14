@@ -3,7 +3,12 @@ package com.lezko.coordgrid.geometry;
 import com.lezko.coordgrid.drawer.BHLineDrawer;
 import com.lezko.coordgrid.drawer.PixelDrawer;
 
+import java.awt.*;
+
 public class Line implements Object {
+
+    private static final Color DEFAULT_COLOR = Color.BLACK;
+    private Color color = DEFAULT_COLOR;
 
     private final Point point1, point2;
 
@@ -25,8 +30,22 @@ public class Line implements Object {
     }
 
     @Override
-    public void render(PixelDrawer pixelDrawer, double screenX, double screenY, int screenWidth, int screenHeight, double scale) {
-        new BHLineDrawer(pixelDrawer)
-                .drawLine((int) ((point1.getX() - screenX) * scale), (int) ((point1.getY() - screenY) * scale), (int) ((point2.getX() - screenX) * scale), (int) ((point2.getY() - screenY) * scale));
+    public void render(
+        PixelDrawer pixelDrawer,
+        double screenX,
+        double screenY,
+        int screenWidth,
+        int screenHeight,
+        double scale,
+        boolean xInverted,
+        boolean yInverted
+    ) {
+        new BHLineDrawer(pixelDrawer).drawLine(
+            (int) ((point1.getX() * (xInverted ? -1 : 1) - screenX) * scale),
+            (int) ((point1.getY() * (yInverted ? -1 : 1) - screenY) * scale),
+            (int) ((point2.getX() * (xInverted ? -1 : 1) - screenX) * scale),
+            (int) ((point2.getY() * (yInverted ? -1 : 1) - screenY) * scale),
+            color
+        );
     }
 }
